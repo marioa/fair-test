@@ -27,4 +27,37 @@ From [Lamprecht, Anna-Lena et al. (2020)](https://dx.doi.org/10.3233/DS-190026) 
 | R1.2  | (Meta)data are associated with detailed provenance.          | Software metadata include detailed provenance, detail level should be community agreed. | Rephrased                         |
 | R1.3  | (Meta)data meet domain-relevant community standards.         | Software metadata and documentation meet domain-relevant community standards. | Rephrased                         |
 
+
+
+## Tools used
+
+Tools used to measure compliance with FAIR:
+
+* [somef](https://github.com/KnowledgeCaptureAndDiscovery/somef)
+* [Howfairis](https://github.com/fair-software/howfairis)
+* [Fair-enough-metrics](https://github.com/vemonet/fair-enough-metrics)
+
 ## Changes
+
+What was required to compy with the metrics.
+
+|       | FAIR  for data | FAIR for software |
+| ----- | -------------- | ----------------- |
+| F1    |                |                   |
+| F2    |                |                   |
+| F3    |                |                   |
+| F4    |                |                   |
+| A1    |                |                   |
+| A1.1  |                |                   |
+| A1.2  |                |                   |
+| A2    |                |                   |
+| I1    |                |                   |
+| I2    |                |                   |
+| I2S.1 |                |                   |
+| I2S.2 |                |                   |
+| I3    |                |                   |
+| I4S   |                |                   |
+| R1    |                |                   |
+| R1.1  |                |                   |
+| R1.2  |                |                   |
+| R1.3  |                |                   |

@@ -2,8 +2,6 @@
 
 This is a target end point for FAIR testing software to try and evaluate how easy/expensive it is to get a fully compliant repository that observes the FAIR principles.
 
-[TOC]
-
 ## FAIR principles for data and software
 
 From [Lamprecht, Anna-Lena et al. (2020)](https://dx.doi.org/10.3233/DS-190026) we get the FAIR principles as follows.

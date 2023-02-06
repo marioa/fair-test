@@ -28,3 +28,5 @@ From [Lamprecht, Anna-Lena et al. (2020)](https://dx.doi.org/10.3233/DS-190026) 
 | R1.1  | (Meta)data are released with a clear and accessible data usage license. | Software and its associated metadata have independent, clear and accessible usage licenses compatible with the software dependencies. | Rephrased and extended            |
 | R1.2  | (Meta)data are associated with detailed provenance.          | Software metadata include detailed provenance, detail level should be community agreed. | Rephrased                         |
 | R1.3  | (Meta)data meet domain-relevant community standards.         | Software metadata and documentation meet domain-relevant community standards. | Rephrased                         |
+
+## Changes

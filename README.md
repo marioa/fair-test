@@ -52,6 +52,8 @@ What was required to compy with the metrics.
 |       | FAIR  for data | FAIR for software |
 | ----- | -------------- | ----------------- |
 | F1    |                |                   |
+| F1.1  |          -     |                   |
+| F1.2  |          -     |                   |
 | F2    |                |                   |
 | F3    |                |                   |
 | F4    |                |                   |
@@ -61,11 +63,10 @@ What was required to compy with the metrics.
 | A2    |                |                   |
 | I1    |                |                   |
 | I2    |                |                   |
-| I2S.1 |                |                   |
-| I2S.2 |                |                   |
-| I3    |                |                   |
-| I4S   |                |                   |
+| I3    |                |   -               |
 | R1    |                |                   |
 | R1.1  |                |                   |
 | R1.2  |                |                   |
 | R1.3  |                |                   |
+| R2    |          -     |                   |
+| R3    |          -     |                   |

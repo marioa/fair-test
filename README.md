@@ -1,5 +1,7 @@
 # FAIR Test Repository
 
+[![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B%20%20%E2%97%8F%20%20%E2%97%8B-orange)](https://fair-software.eu)
+
 This is a target end point for FAIR testing software to try and evaluate how easy/expensive it is to get a fully compliant repository that observes the FAIR principles.
 
 ## FAIR principles for data and software

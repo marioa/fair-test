@@ -4,28 +4,36 @@ This is a target end point for FAIR testing software to try and evaluate how eas
 
 ## FAIR principles for data and software
 
-From [Lamprecht, Anna-Lena et al. (2020)](https://dx.doi.org/10.3233/DS-190026) we get the FAIR principles as follows.
+From [Lamprecht, Anna-Lena et al. (2020)](https://dx.doi.org/10.3233/DS-190026) modified according to [Chue Hong, N. et al (2022)](https://10.15497/RDA00068). In general for software:
 
-|       | FAIR for data                                                | FAIR for software                                            | Operation                         |
-| ----- | ------------------------------------------------------------ | ------------------------------------------------------------ | --------------------------------- |
-| F1    | (Meta)data are assigned a globally unique and persistent identifier. | Software and its associated metadata have a global, unique and persistent identifier for each released version. | Rephrased                         |
-| F2    | Data are described with rich metadata.                       | Software is described with rich metadata.                    | Rephrased                         |
-| F3    | Metadata clearly and explicitly include the identifier of the data it describes. | Metadata clearly and explicitly include identifiers for all the versions of the software it describes. | Rephrased and extended            |
-| F4    | (Meta)data are registered or indexed in a searchable resource. | Software and its associated metadata are included in a searchable software registry. | Rephrased                         |
-| A1    | (Meta)data are retrievable by their identifier using a standardized communications protocol. | Software and its associated metadata are accessible by their identifier using a standardized communications protocol. | Rephrased                         |
-| A1.1  | The protocol is open, free, and universally implementable.   | The protocol is open, free, and universally implementable.   | Remain the same                   |
-| A1.2  | The protocol allows for an authentication and authorization procedure, where necessary. | The protocol allows for an authentication and authorization procedure, where necessary. | Remain the same                   |
-| A2    | Metadata are accessible, even when the data are no longer available. | Software metadata are accessible, even when the software is no longer available. | Rephrased                         |
-| I1    | (Meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation. | Software and its associated metadata use a formal, accessible, shared and broadly applicable language to facilitate machine readability and data exchange. | Rephrased and extended            |
-| I2    | (Meta)data use vocabularies that follow FAIR principles.     | –                                                            | Reinterpreted, extended and split |
-| I2S.1 | –                                                            | Software and its associated metadata are formally described using controlled vocabularies that follow the FAIR principles. | Reinterpreted, extended and split |
-| I2S.2 | –                                                            | Software use and produce data in types and formats that are formally described using controlled vocabularies that follow the FAIR principles. | Reinterpreted, extended and split |
-| I3    | (Meta)data include qualified references to other (meta)data. | –                                                            | Discarded                         |
-| I4S   | –                                                            | Software dependencies are documented and mechanisms to access them exist. | Newly proposed                    |
-| R1    | (Meta)data are richly described with a plurality of accurate and relevant attributes. | Software and its associated metadata are richly described with a plurality of accurate and relevant attributes. | Rephrased                         |
-| R1.1  | (Meta)data are released with a clear and accessible data usage license. | Software and its associated metadata have independent, clear and accessible usage licenses compatible with the software dependencies. | Rephrased and extended            |
-| R1.2  | (Meta)data are associated with detailed provenance.          | Software metadata include detailed provenance, detail level should be community agreed. | Rephrased                         |
-| R1.3  | (Meta)data meet domain-relevant community standards.         | Software metadata and documentation meet domain-relevant community standards. | Rephrased                         |
+* **F: Software, and its associated metadata, is easy for both humans and machines to find.**
+* **A: Software, and its metadata, is retrievable via standardized protocols.**
+* **I: Software interoperates with other software by exchanging data and/or metadata, and/or through interaction via application programming interfaces (APIs), described through standards.**
+* **R: Software is both usable (can be executed) and reusable (can be understood, modified, built upon, or incorporated into other software).**
+
+and in more detail:
+
+|      | FAIR for data                                                | FAIR for software                                            |
+| ---- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| F1   | (Meta)data are assigned a globally unique and persistent identifier. | Software is assigned a globally unique and persistent identifier. |
+| F1.1 | -                                                            | Components of the software representing levels of granularity are assigned distinct identifiers. |
+| F1.2 | -                                                            | Different versions of the software are assigned distinct identifiers. |
+| F2   | Data are described with rich metadata.                       | Software is described with rich metadata.                    |
+| F3   | Metadata clearly and explicitly include the identifier of the data it describes. | Metadata clearly and explicitly include the identifier of the software they describe. |
+| F4   | (Meta)data are registered or indexed in a searchable resource. | Metadata are FAIR, searchable and indexable.                 |
+| A1   | (Meta)data are retrievable by their identifier using a standardized communications protocol. | Software and its associated metadata are accessible by their identifier using a standardized communications protocol. |
+| A1.1 | The protocol is open, free, and universally implementable.   | The protocol is open, free, and universally implementable.   |
+| A1.2 | The protocol allows for an authentication and authorization procedure, where necessary. | The protocol allows for an authentication and authorization procedure, where necessary. |
+| A2   | Metadata are accessible, even when the data are no longer available. | Metadata are accessible, even when the software is no longer available. |
+| I1   | (Meta)data use a formal, accessible, shared, and broadly applicable language for knowledge representation. | Software reads, writes and exchanges data in a way that meets domain-relevant community standards. |
+| I2   | (Meta)data use vocabularies that follow FAIR principles.     | Software includes qualified references to other objects.     |
+| I3   | (Meta)data include qualified references to other (meta)data. | –                                                            |
+| R1   | (Meta)data are richly described with a plurality of accurate and relevant attributes. | Software is described with a plurality of accurate and relevant attributes. |
+| R1.1 | (Meta)data are released with a clear and accessible data usage license. | Software is given a clear and accessible license.            |
+| R1.2 | (Meta)data are associated with detailed provenance.          | Software is associated with detailed provenance.             |
+| R1.3 | (Meta)data meet domain-relevant community standards.         | -                                                            |
+| R2   | -                                                            | Software includes qualified references to other software.    |
+| R3   | -                                                            | Software includes qualified references to other software.    |
 
 
 

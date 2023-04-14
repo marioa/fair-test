@@ -6,7 +6,7 @@ This is a target end point for FAIR and FAIR4RS metric testing software to evalu
 
 ## FAIR principles for data and research software
 
-From [Lamprecht, Anna-Lena et al. (2020)](https://dx.doi.org/10.3233/DS-190026) modified according to [Chue Hong, N. et al (2022)](https://10.15497/RDA00068](https://doi.org/10.15497/RDA00065). In general for software:
+From [Lamprecht, Anna-Lena et al. (2020)](https://dx.doi.org/10.3233/DS-190026) modified according to [Chue Hong, N. et al (2022)](https://doi.org/10.15497/RDA00065). In general for software:
 
 * **F: Software, and its associated metadata, is easy for both humans and machines to find.**
 * **A: Software, and its metadata, is retrievable via standardized protocols.**

@@ -2,9 +2,9 @@
 
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B%20%20%E2%97%8F%20%20%E2%97%8B-orange)](https://fair-software.eu)
 
-This is a target end point for FAIR testing software to try and evaluate how easy/expensive it is to get a fully compliant repository that observes the FAIR principles.
+This is a target end point for FAIR and FAIR4RS metric testing software to evaluate how easy/expensive it is to get a fully compliant repository that complies with the FAIR principles.
 
-## FAIR principles for data and software
+## FAIR principles for data and research software
 
 From [Lamprecht, Anna-Lena et al. (2020)](https://dx.doi.org/10.3233/DS-190026) modified according to [Chue Hong, N. et al (2022)](https://10.15497/RDA00068). In general for software:
 

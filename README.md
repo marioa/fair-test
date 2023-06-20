@@ -1,13 +1,8 @@
-[//]: # (Title: FAIR Test Repository)  
-[//]: # (Author: Mario Antonioletti)  
-[//]: # (Tags: #fair #fair-test)  
-[//]: # (Date: June 16, 2023) 
-
 # FAIR Test Repository
 
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B%20%20%E2%97%8F%20%20%E2%97%8B-orange)](https://fair-software.eu)
 
-This is a target end point for FAIR and FAIR4RS metric testing software to evaluate how easy/expensive it is to get a fully compliant repository that complies with the FAIR principles.
+This is a target end point for FAIR and FAIR4RS metric testing software to evaluate how easy/expensive it is to get a fully compliant repository that complies with the FAIR principles. The `codemeta.json` file was generated using the [codemeta-generator](https://codemeta.github.io/codemeta-generator/).
 
 ## FAIR principles for data and research software
 

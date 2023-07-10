@@ -1,11 +1,15 @@
-cff-version: 1.2.0
-message: "Dummy cff file"
+cff-version: "1.2.0"
 authors:
-- family-names: "Antonioletti"
+- affiliation: "EPCC, University of Edinburgh"
+  family-names: "Antonioletti"
   given-names: "Mario"
   orcid: "https://orcid.org/0000-0002-2486-7990"
 title: "Testing FAIR4RS"
-version: 0.1
-doi: 
+keywords:
+ - "FAIR"
+ - "fair-test-target"
+ - "FAIR4RS"
+version: "0.1"
+license: "MIT"
 date-released: 2023-02-15
-url: "https://github.com/marioa/fair-test"
+repository-code: "https://github.com/marioa/fair-test"

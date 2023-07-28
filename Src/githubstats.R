@@ -3,6 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(scales)
 library(tibble)
+library(lubridate)
 
 # https://github.com/r-lib/gh
 
@@ -25,7 +26,7 @@ r %>% mutate(cdate = as.Date(commit.committer.date)) %>%
 p <- fromJSON("https://api.github.com/repos/fair-software/howfairis/commits", simplifyDataFrame = TRUE, flatten = TRUE)
 
 p %>% mutate(cdate = as.Date(commit.committer.date)) %>% 
-      mutate(Tool = "howfairis")                  %>% 
+      mutate(Tool = "howfairis")                     %>% 
       select(cdate, Tool) -> new_rows
 
 ToolCommits <- add_row(ToolCommits, new_rows)
@@ -34,7 +35,7 @@ ToolCommits <- add_row(ToolCommits, new_rows)
 q <- fromJSON("https://api.github.com/repos/pangaea-data-publisher/fuji/commits", simplifyDataFrame = TRUE, flatten = TRUE)
 
 q %>% mutate(cdate = as.Date(commit.committer.date)) %>% 
-      mutate(Tool = "F-UJI")                  %>% 
+      mutate(Tool = "F-UJI")                         %>% 
       select(cdate, Tool) -> new_rows
 
 ToolCommits <- add_row(ToolCommits, new_rows)
@@ -43,7 +44,7 @@ ToolCommits <- add_row(ToolCommits, new_rows)
 s <- fromJSON("https://api.github.com/repos/MaastrichtU-IDS/fair-enough-metrics/commits", simplifyDataFrame = TRUE, flatten = TRUE)
 
 s %>% mutate(cdate = as.Date(commit.committer.date)) %>% 
-      mutate(Tool = "FAIR-Enough")                  %>% 
+      mutate(Tool = "FAIR-Enough")                   %>% 
       select(cdate, Tool)-> new_rows
 
 ToolCommits <- add_row(ToolCommits, new_rows)
@@ -57,3 +58,10 @@ ToolCommits %>%
                theme_bw() + 
                scale_y_continuous(breaks = breaks_pretty()) +
                labs(x = "Commit date", y = "Number of commts") 
+
+ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "month")) %>% 
+               ggplot(aes(x = cdate, fill = Tool)) + 
+               geom_bar(colour = "black", position = position_dodge()) + 
+               theme_bw() + 
+               scale_y_continuous(breaks = breaks_pretty()) +
+               labs(x = "Commit date", y = "Number of commts per month")

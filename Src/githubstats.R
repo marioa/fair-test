@@ -1,3 +1,6 @@
+#
+# Get the commits for various FAIR checking packages.
+#
 library(jsonlite)
 library(dplyr)
 library(ggplot2)
@@ -5,9 +8,7 @@ library(scales)
 library(tibble)
 library(lubridate)
 
-# https://github.com/r-lib/gh
-
-# Commits
+# Get commits on GitHub
 #
 # /repos/{owner}/{repo}/commits
 # https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28
@@ -15,7 +16,7 @@ library(lubridate)
 
 # Get  commit data --------------------------------------------------------
 
-# FAIR-Checker
+# FAIR-Checker https://github.com/IFB-ElixirFr/FAIR-checker
 r <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits", simplifyDataFrame = TRUE, flatten = TRUE)
 
 r %>% mutate(cdate = as.Date(commit.committer.date)) %>% 

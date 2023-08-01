@@ -14,7 +14,7 @@ library(lubridate)
 # https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28
 
 
-# Get  commit data --------------------------------------------------------
+# Get the commit data --------------------------------------------------------
 
 # FAIR-Checker https://github.com/IFB-ElixirFr/FAIR-checker
 r <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits", simplifyDataFrame = TRUE, flatten = TRUE)
@@ -50,9 +50,9 @@ s %>% mutate(cdate = as.Date(commit.committer.date)) %>%
 
 ToolCommits <- add_row(ToolCommits, new_rows)
 
-
 # Plot the data -----------------------------------------------------------
 
+# Plot commits by date
 ToolCommits %>% 
                ggplot(aes(x = cdate, fill = Tool)) + 
                geom_bar(colour = "black") + 
@@ -60,7 +60,24 @@ ToolCommits %>%
                scale_y_continuous(breaks = breaks_pretty()) +
                labs(x = "Commit date", y = "Number of commts") 
 
+# Plot commits by day
+ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "day")) %>% 
+               ggplot(aes(x = cdate, fill = Tool)) + 
+               geom_bar(colour = "black", position = position_dodge()) + 
+               theme_bw() + 
+               scale_y_continuous(breaks = breaks_pretty()) +
+               labs(x = "Commit date", y = "Number of commts per month")
+
+# Plot commits by month
 ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "month")) %>% 
+               ggplot(aes(x = cdate, fill = Tool)) + 
+               geom_bar(colour = "black", position = position_dodge()) + 
+               theme_bw() + 
+               scale_y_continuous(breaks = breaks_pretty()) +
+               labs(x = "Commit date", y = "Number of commts per month")
+
+# Plot commits by week
+ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>% 
                ggplot(aes(x = cdate, fill = Tool)) + 
                geom_bar(colour = "black", position = position_dodge()) + 
                theme_bw() + 

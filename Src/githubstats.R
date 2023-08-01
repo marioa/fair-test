@@ -66,7 +66,7 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "day")) %>%
                geom_bar(colour = "black", position = position_dodge()) + 
                theme_bw() + 
                scale_y_continuous(breaks = breaks_pretty()) +
-               labs(x = "Commit date", y = "Number of commts per month")
+               labs(x = "Commit date", y = "Number of commts per day")
 
 # Plot commits by month
 ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "month")) %>% 
@@ -74,7 +74,7 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "month")) %>%
                geom_bar(colour = "black", position = position_dodge()) + 
                theme_bw() + 
                scale_y_continuous(breaks = breaks_pretty()) +
-               labs(x = "Commit date", y = "Number of commts per month")
+               labs(x = "Commit date", y = "Number of commts per week")
 
 # Plot commits by week
 ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>% 
@@ -88,7 +88,7 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>%
 ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_point() + geom_line() +
                  theme_bw() + 
-                 labs(x = "Commit date", y = "Tool")
+                 labs(x = "Commit dates", y = "Tool") 
 
 # Commits - first and last commit only
 ToolCommits %>%  group_by(Tool) %>% 
@@ -96,5 +96,5 @@ ToolCommits %>%  group_by(Tool) %>%
                  geom_line() +
                  theme_bw() + 
                  stat_summary(fun.y = min, geom = "point", size = 3) +
-                 stat_summary(fun.y = max, geom = "point", size = 3)
-                 labs(x = "Commit date", y = "Tool")
+                 stat_summary(fun.y = max, geom = "point", size = 3) +
+                 labs(x = "Commit dates", y = "Tool")

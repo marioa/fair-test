@@ -83,3 +83,18 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>%
                theme_bw() + 
                scale_y_continuous(breaks = breaks_pretty()) +
                labs(x = "Commit date", y = "Number of commts per month")
+
+# Commits Tool by date
+ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
+                 geom_point() + geom_line() +
+                 theme_bw() + 
+                 labs(x = "Commit date", y = "Tool")
+
+# Commits - first and last commit only
+ToolCommits %>%  group_by(Tool) %>% 
+                 ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
+                 geom_line() +
+                 theme_bw() + 
+                 stat_summary(fun.y = min, geom = "point", size = 3) +
+                 stat_summary(fun.y = max, geom = "point", size = 3)
+                 labs(x = "Commit date", y = "Tool")

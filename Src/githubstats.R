@@ -97,4 +97,4 @@ ToolCommits %>%  group_by(Tool) %>%
                  theme_bw() + 
                  stat_summary(fun.y = min, geom = "point", size = 3) +
                  stat_summary(fun.y = max, geom = "point", size = 3) +
-                 labs(x = "Commit dates", y = "Tool")
+                 labs(x = "Dates", y = "Tool")

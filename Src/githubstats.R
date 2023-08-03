@@ -98,3 +98,39 @@ ToolCommits %>%  group_by(Tool) %>%
                  stat_summary(fun.y = min, geom = "point", size = 3) +
                  stat_summary(fun.y = max, geom = "point", size = 3) +
                  labs(x = "Dates", y = "Tool")
+
+
+# Releases ----------------------------------------------------------------
+
+# https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28
+#
+# /repos/{owner}/{repo}/releases
+#
+
+# Reset the array
+Releases <-  tibble()
+
+# FAIR-Checker https://github.com/IFB-ElixirFr/FAIR-checker
+r <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/releases", simplifyDataFrame = TRUE, flatten = TRUE)
+
+r %>% mutate(rdate = as.Date(created_at)) %>% 
+      mutate(Tool = "FAIR-Checker")       %>% 
+      select(tag_name, rdate, Tool) -> Releases
+
+# Howfairis https://github.com/fair-software/howfairis
+p <- fromJSON("https://api.github.com/repos/fair-software/howfairis/releases", simplifyDataFrame = TRUE, flatten = TRUE)
+
+p %>% mutate(rdate = as.Date(created_at)) %>% 
+      mutate(Tool = "howfairis")          %>% 
+      select(tag_name, rdate, Tool) -> new_rows
+
+Releases <- add_row(Releases, new_rows)
+
+
+# Plot releases -----------------------------------------------------------
+
+Releases %>%  ggplot(aes(x = rdate, y = Tool, colour = Tool)) + 
+              geom_point() + geom_line() +
+              theme_bw() + 
+              labs(x = "Release dates", y = "Tool") 
+

@@ -7,6 +7,7 @@ library(ggplot2)
 library(scales)
 library(tibble)
 library(lubridate)
+library(ggrepel)
 
 # Get commits on GitHub
 #
@@ -126,11 +127,21 @@ p %>% mutate(rdate = as.Date(created_at)) %>%
 
 Releases <- add_row(Releases, new_rows)
 
+# F-UJI https://github.com/pangaea-data-publisher/fuji
+q <- fromJSON("https://api.github.com/repos/pangaea-data-publisher/fuji/releases", simplifyDataFrame = TRUE, flatten = TRUE)
+
+q %>% mutate(rdate = as.Date(created_at)) %>% 
+      mutate(Tool = "F-UJI")          %>% 
+      select(tag_name, rdate, Tool) -> new_rows
+
+Releases <- add_row(Releases, new_rows)
 
 # Plot releases -----------------------------------------------------------
 
 Releases %>%  ggplot(aes(x = rdate, y = Tool, colour = Tool)) + 
-              geom_point() + geom_line() +
-              theme_bw() + 
+              geom_point() + 
+              geom_line() +
+              theme_bw() + theme(legend.position = "none") +
+              geom_label_repel(aes(label = tag_name), force = 2) +
               labs(x = "Release dates", y = "Tool") 
 

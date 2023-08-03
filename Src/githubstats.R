@@ -108,33 +108,37 @@ ToolCommits %>%  group_by(Tool) %>%
 # /repos/{owner}/{repo}/releases
 #
 
+Rel <- function(dat, rel, tool){
+  
+  dat %>% mutate(rdate = as.Date(created_at)) %>% 
+          mutate(Tool = tool)                 %>% 
+          select(tag_name, rdate, Tool) -> new_rows
+  
+  if(ncol(rel) == 0){
+       rel <- new_rows
+  }else{
+       rel <- add_row( rel, new_rows)
+  }
+          
+}
+
 # Reset the array
 Releases <-  tibble()
 
 # FAIR-Checker https://github.com/IFB-ElixirFr/FAIR-checker
 r <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/releases", simplifyDataFrame = TRUE, flatten = TRUE)
 
-r %>% mutate(rdate = as.Date(created_at)) %>% 
-      mutate(Tool = "FAIR-Checker")       %>% 
-      select(tag_name, rdate, Tool) -> Releases
+Releases <- Rel(r, Releases, "FAIR-Checker")
 
 # Howfairis https://github.com/fair-software/howfairis
 p <- fromJSON("https://api.github.com/repos/fair-software/howfairis/releases", simplifyDataFrame = TRUE, flatten = TRUE)
 
-p %>% mutate(rdate = as.Date(created_at)) %>% 
-      mutate(Tool = "howfairis")          %>% 
-      select(tag_name, rdate, Tool) -> new_rows
-
-Releases <- add_row(Releases, new_rows)
+Releases <- Rel(p, Releases, "howfairis")
 
 # F-UJI https://github.com/pangaea-data-publisher/fuji
 q <- fromJSON("https://api.github.com/repos/pangaea-data-publisher/fuji/releases", simplifyDataFrame = TRUE, flatten = TRUE)
 
-q %>% mutate(rdate = as.Date(created_at)) %>% 
-      mutate(Tool = "F-UJI")          %>% 
-      select(tag_name, rdate, Tool) -> new_rows
-
-Releases <- add_row(Releases, new_rows)
+Releases <- Rel(q, Releases, "F-UJI")
 
 # Plot releases -----------------------------------------------------------
 

@@ -149,3 +149,12 @@ Releases %>%  ggplot(aes(x = rdate, y = Tool, colour = Tool)) +
               geom_label_repel(aes(label = tag_name), force = 2) +
               labs(x = "Release dates", y = "Tool") 
 
+# Only label the first and last release for each tool
+Releases %>%  group_by(Tool) %>% 
+              ggplot(aes(x = rdate, y = Tool, colour = Tool)) + 
+              geom_point() + 
+              geom_line() +
+              theme_bw() + theme(legend.position = "none") +
+              geom_label_repel(data = Releases %>% group_by(Tool) %>% filter(rdate == min(rdate)| rdate == max(rdate)), aes(label = tag_name), 
+                                nudge_y = 0.1) +
+              labs(x = "Release dates", y = "Tool") 

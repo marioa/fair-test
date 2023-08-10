@@ -39,22 +39,22 @@ Commits <- function(dat, rel, tool){
 ToolCommits <- tibble()
 
 # FAIR-Checker https://github.com/IFB-ElixirFr/FAIR-checker
-r <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits", simplifyDataFrame = TRUE, flatten = TRUE)
+r <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
 
 ToolCommits <- Commits(r, ToolCommits, "FAIR-Checker")
 
 # Howfairis https://github.com/fair-software/howfairis
-p <- fromJSON("https://api.github.com/repos/fair-software/howfairis/commits", simplifyDataFrame = TRUE, flatten = TRUE)
+p <- fromJSON("https://api.github.com/repos/fair-software/howfairis/commits?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
 
 ToolCommits <- Commits(p, ToolCommits, "howfairis")
 
 # F-UJI https://github.com/pangaea-data-publisher/fuji
-q <- fromJSON("https://api.github.com/repos/pangaea-data-publisher/fuji/commits", simplifyDataFrame = TRUE, flatten = TRUE)
+q <- fromJSON("https://api.github.com/repos/pangaea-data-publisher/fuji/commits?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
 
 ToolCommits <- Commits(q, ToolCommits, "F-UJI")
 
 # FAIR-Enough https://github.com/MaastrichtU-IDS/fair-enough-metrics
-s <- fromJSON("https://api.github.com/repos/MaastrichtU-IDS/fair-enough-metrics/commits", simplifyDataFrame = TRUE, flatten = TRUE)
+s <- fromJSON("https://api.github.com/repos/MaastrichtU-IDS/fair-enough-metrics/commits?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
 
 ToolCommits <- Commits(s, ToolCommits, "FAIR-Enough")
 

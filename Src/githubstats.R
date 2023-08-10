@@ -17,41 +17,50 @@ library(ggrepel)
 
 # Get the commit data --------------------------------------------------------
 
+# Function to process the commit data
+# dat - the input data
+# rel - the tibble tht contains the current data which will get appended to
+# tool - string with the tool name
+Commits <- function(dat, rel, tool){
+  
+  dat %>% mutate(cdate = as.Date(commit.committer.date)) %>% 
+          mutate(Tool = tool)                            %>% 
+          select(cdate, Tool) -> new_rows
+  
+  if(ncol(rel) == 0){
+       rel <- new_rows
+  }else{
+       rel <- add_row( rel, new_rows)
+  }
+          
+}
+
+# Clear the existing commit information
+ToolCommits <- tibble()
+
 # FAIR-Checker https://github.com/IFB-ElixirFr/FAIR-checker
 r <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits", simplifyDataFrame = TRUE, flatten = TRUE)
 
-r %>% mutate(cdate = as.Date(commit.committer.date)) %>% 
-      mutate(Tool = "FAIR-Checker")                  %>% 
-      select(cdate, Tool) -> ToolCommits
+ToolCommits <- Commits(r, ToolCommits, "FAIR-Checker")
 
 # Howfairis https://github.com/fair-software/howfairis
 p <- fromJSON("https://api.github.com/repos/fair-software/howfairis/commits", simplifyDataFrame = TRUE, flatten = TRUE)
 
-p %>% mutate(cdate = as.Date(commit.committer.date)) %>% 
-      mutate(Tool = "howfairis")                     %>% 
-      select(cdate, Tool) -> new_rows
-
-ToolCommits <- add_row(ToolCommits, new_rows)
+ToolCommits <- Commits(p, ToolCommits, "howfairis")
 
 # F-UJI https://github.com/pangaea-data-publisher/fuji
 q <- fromJSON("https://api.github.com/repos/pangaea-data-publisher/fuji/commits", simplifyDataFrame = TRUE, flatten = TRUE)
 
-q %>% mutate(cdate = as.Date(commit.committer.date)) %>% 
-      mutate(Tool = "F-UJI")                         %>% 
-      select(cdate, Tool) -> new_rows
-
-ToolCommits <- add_row(ToolCommits, new_rows)
+ToolCommits <- Commits(q, ToolCommits, "F-UJI")
 
 # FAIR-Enough https://github.com/MaastrichtU-IDS/fair-enough-metrics
 s <- fromJSON("https://api.github.com/repos/MaastrichtU-IDS/fair-enough-metrics/commits", simplifyDataFrame = TRUE, flatten = TRUE)
 
-s %>% mutate(cdate = as.Date(commit.committer.date)) %>% 
-      mutate(Tool = "FAIR-Enough")                   %>% 
-      select(cdate, Tool)-> new_rows
+ToolCommits <- Commits(s, ToolCommits, "FAIR-Enough")
 
-ToolCommits <- add_row(ToolCommits, new_rows)
 
 # Plot the data -----------------------------------------------------------
+
 
 # Plot commits by date
 ToolCommits %>% 

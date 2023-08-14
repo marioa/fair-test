@@ -9,13 +9,34 @@ library(tibble)
 library(lubridate)
 library(ggrepel)
 
-# Get commits on GitHub
-#
-# /repos/{owner}/{repo}/commits
-# https://docs.github.com/en/rest/commits/commits?apiVersion=2022-11-28
-
 
 # Get the commit data --------------------------------------------------------
+
+# Get commits from specific repositories on GitHub
+#
+# /repos/{owner}/{repo}/commits
+# https://docs.github.com/en/rest/commits/commits
+#
+# default is to return 30 records, can be set with per_page with a max of 100.
+
+# Get the data from GitHub including pagination
+# Need to give it the base url including "?per_page=100&page=" at the end of the URL,
+# dat is the tibble to be used (optional) and page is the starting page which defaults
+# to 1.
+getData <- function(baseURL, dat = tibble(), page = 1){
+  
+  while(!is.null(nrow(w <- fromJSON(paste0(baseURL, page), simplifyDataFrame = TRUE, flatten = TRUE)))){
+      w <- as_tibble(w)
+      message("Doing page ", page)
+      page <- page + 1
+      if(ncol(dat) == 0){
+        dat <- w
+      }else{
+        dat <-add_row(dat, w)
+      }
+  } # End while
+  return(dat)
+}
 
 # Function to process the commit data
 # dat - the input data
@@ -38,23 +59,28 @@ Commits <- function(dat, rel, tool){
 # Clear the existing commit information
 ToolCommits <- tibble()
 
-# FAIR-Checker https://github.com/IFB-ElixirFr/FAIR-checker
-r <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
+## FAIR-Checker ---- 
+# https://github.com/IFB-ElixirFr/FAIR-checker
+r <- getData("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits?per_page=100&page=")
 
+# Get the commit information
 ToolCommits <- Commits(r, ToolCommits, "FAIR-Checker")
 
-# Howfairis https://github.com/fair-software/howfairis
-p <- fromJSON("https://api.github.com/repos/fair-software/howfairis/commits?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
+## Howfairis ----
+# https://github.com/fair-software/howfairis
+p <- getData("https://api.github.com/repos/fair-software/howfairis/commits?per_page=100&page=")
 
 ToolCommits <- Commits(p, ToolCommits, "howfairis")
 
-# F-UJI https://github.com/pangaea-data-publisher/fuji
-q <- fromJSON("https://api.github.com/repos/pangaea-data-publisher/fuji/commits?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
+## F-UJI ----
+# https://github.com/pangaea-data-publisher/fuji
+q <- getData("https://api.github.com/repos/pangaea-data-publisher/fuji/commits?per_page=100&page=")
 
 ToolCommits <- Commits(q, ToolCommits, "F-UJI")
 
-# FAIR-Enough https://github.com/MaastrichtU-IDS/fair-enough-metrics
-s <- fromJSON("https://api.github.com/repos/MaastrichtU-IDS/fair-enough-metrics/commits?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
+## FAIR-Enough ----
+# https://github.com/MaastrichtU-IDS/fair-enough-metrics
+s <- getData("https://api.github.com/repos/MaastrichtU-IDS/fair-enough-metrics/commits?per_page=100&page=")
 
 ToolCommits <- Commits(s, ToolCommits, "FAIR-Enough")
 
@@ -98,6 +124,14 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>%
 ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_point() + geom_line() +
                  theme_bw() + 
+                 theme(legend.position = "None") +
+                 labs(x = "Commit dates", y = "Tool") 
+
+# Violin plot of commits Tool by date
+ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
+                 geom_violin() + 
+                 theme_bw() + 
+                 theme(legend.position = "None") +
                  labs(x = "Commit dates", y = "Tool") 
 
 # Commits - first and last commit only
@@ -105,6 +139,7 @@ ToolCommits %>%  group_by(Tool) %>%
                  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_line() +
                  theme_bw() + 
+                 theme(legend.position = "None") +
                  stat_summary(fun.y = min, geom = "point", size = 3) +
                  stat_summary(fun.y = max, geom = "point", size = 3) +
                  labs(x = "Dates", y = "Tool")

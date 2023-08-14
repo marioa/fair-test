@@ -120,9 +120,26 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>%
                scale_y_continuous(breaks = breaks_pretty()) +
                labs(x = "Commit date", y = "Number of commts per month")
 
+# Density plot
+ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>% 
+               ggplot(aes(x = cdate, fill = Tool)) + 
+               geom_density(colour = "black", alpha = 0.25) + 
+               theme_bw() + 
+               scale_y_continuous(breaks = breaks_pretty()) +
+               labs(x = "Commit date", y = "Number of commts per month")
+
 # Commits Tool by date
 ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_point() + geom_line() +
+                 theme_bw() + 
+                 theme(legend.position = "None") +
+                 labs(x = "Commit dates", y = "Tool") +
+                 geom_label_repel(data = ToolCommits %>%  group_by(Tool) %>% reframe(y = Tool, x = max(cdate), label = n()) %>% distinct(),
+                   aes(x = x, y = y, label = paste0("Total Commits = ", label)), colour = "black",
+                   nudge_y = 0.1)
+
+ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
+                 geom_point(alpha = 0.25) + geom_line() + geom_jitter() +
                  theme_bw() + 
                  theme(legend.position = "None") +
                  labs(x = "Commit dates", y = "Tool") 
@@ -131,6 +148,8 @@ ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) +
 ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_violin() + 
                  theme_bw() + 
+                 stat_summary(fun.y = min, geom = "point", size = 3) +
+                 stat_summary(fun.y = max, geom = "point", size = 3) +
                  theme(legend.position = "None") +
                  labs(x = "Commit dates", y = "Tool") 
 

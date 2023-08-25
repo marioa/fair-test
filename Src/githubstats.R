@@ -146,8 +146,8 @@ ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) +
 ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_violin() + 
                  theme_bw() + 
-                 stat_summary(fun.y = min, geom = "point", size = 3) +
-                 stat_summary(fun.y = max, geom = "point", size = 3) +
+                 stat_summary(fun = min, geom = "point", size = 3) +
+                 stat_summary(fun = max, geom = "point", size = 3) +
                  theme(legend.position = "None") +
                  labs(x = "Commit dates", y = "Tool") 
 
@@ -157,8 +157,8 @@ ToolCommits %>%  group_by(Tool) %>%
                  geom_line() +
                  theme_bw() + 
                  theme(legend.position = "None") +
-                 stat_summary(fun.y = min, geom = "point", size = 3) +
-                 stat_summary(fun.y = max, geom = "point", size = 3) +
+                 stat_summary(fun = min, geom = "point", size = 3) +
+                 stat_summary(fun = max, geom = "point", size = 3) +
                  labs(x = "Dates", y = "Tool")
 
 

@@ -61,31 +61,35 @@ ToolCommits <- tibble()
 
 ## FAIR-Checker ---- 
 # https://github.com/IFB-ElixirFr/FAIR-checker
-r <- getData("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits?per_page=100&page=")
+r1 <- getData("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/commits?per_page=100&page=")
 
 # Get the commit information
-ToolCommits <- Commits(r, ToolCommits, "FAIR-Checker")
+ToolCommits <- Commits(r1, ToolCommits, "FAIR-Checker")
 
 ## Howfairis ----
 # https://github.com/fair-software/howfairis
-p <- getData("https://api.github.com/repos/fair-software/howfairis/commits?per_page=100&page=")
+#
+# The number of commits not the same as quoted here:
+# https://research-software-directory.org/software/howfairis
+#
+p1 <- getData("https://api.github.com/repos/fair-software/howfairis/commits?per_page=100&page=")
 
-ToolCommits <- Commits(p, ToolCommits, "howfairis")
+ToolCommits <- Commits(p1, ToolCommits, "howfairis")
 
 ## F-UJI ----
 # https://github.com/pangaea-data-publisher/fuji
-q <- getData("https://api.github.com/repos/pangaea-data-publisher/fuji/commits?per_page=100&page=")
+q1 <- getData("https://api.github.com/repos/pangaea-data-publisher/fuji/commits?per_page=100&page=")
 
-ToolCommits <- Commits(q, ToolCommits, "F-UJI")
+ToolCommits <- Commits(q1, ToolCommits, "F-UJI")
 
 ## FAIR-Enough ----
 # https://github.com/MaastrichtU-IDS/fair-enough-metrics
-s <- getData("https://api.github.com/repos/MaastrichtU-IDS/fair-enough-metrics/commits?per_page=100&page=")
+s1 <- getData("https://api.github.com/repos/MaastrichtU-IDS/fair-enough-metrics/commits?per_page=100&page=")
 
-ToolCommits <- Commits(s, ToolCommits, "FAIR-Enough")
+ToolCommits <- Commits(s1, ToolCommits, "FAIR-Enough")
 
 
-# Plot the data -----------------------------------------------------------
+# Plot the commit data -----------------------------------------------------------
 
 
 # Plot commits by date
@@ -102,23 +106,23 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "day")) %>%
                geom_bar(colour = "black", position = position_dodge()) + 
                theme_bw() + 
                scale_y_continuous(breaks = breaks_pretty()) +
-               labs(x = "Commit date", y = "Number of commts per day")
+               labs(x = "Commit date", y = "Number of commits per day")
 
-# Plot commits by month
+# Plot commits aggregated by month
 ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "month")) %>% 
                ggplot(aes(x = cdate, fill = Tool)) + 
                geom_bar(colour = "black", position = position_dodge()) + 
                theme_bw() + 
                scale_y_continuous(breaks = breaks_pretty()) +
-               labs(x = "Commit date", y = "Number of commts per week")
+               labs(x = "Commit date", y = "Number of commits per week")
 
-# Plot commits by week
+# Plot commits aggregated by week
 ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>% 
                ggplot(aes(x = cdate, fill = Tool)) + 
                geom_bar(colour = "black", position = position_dodge()) + 
                theme_bw() + 
                scale_y_continuous(breaks = breaks_pretty()) +
-               labs(x = "Commit date", y = "Number of commts per month")
+               labs(x = "Commit date", y = "Number of commits per month")
 
 # Density plot
 ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>% 
@@ -126,9 +130,9 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>%
                geom_density(colour = "black", alpha = 0.25) + 
                theme_bw() + 
                scale_y_continuous(breaks = breaks_pretty()) +
-               labs(x = "Commit date", y = "Number of commts per month")
+               labs(x = "Commit date", y = "Commit density  per month")
 
-# Commits Tool by date
+# Commits of Tool by date
 ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_point() + geom_line() +
                  theme_bw() + 
@@ -138,13 +142,7 @@ ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) +
                    aes(x = x, y = y, label = paste0("Total Commits = ", label)), colour = "black",
                    nudge_y = 0.1)
 
-ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
-                 geom_point(alpha = 0.25) + geom_line() + geom_jitter() +
-                 theme_bw() + 
-                 theme(legend.position = "None") +
-                 labs(x = "Commit dates", y = "Tool") 
-
-# Violin plot of commits Tool by date
+# Violin plot of commits of Tool by date
 ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_violin() + 
                  theme_bw() + 
@@ -164,7 +162,7 @@ ToolCommits %>%  group_by(Tool) %>%
                  labs(x = "Dates", y = "Tool")
 
 
-# Releases ----------------------------------------------------------------
+# Software releases ---------------------------------------------------------
 
 # https://docs.github.com/en/rest/releases/releases?apiVersion=2022-11-28
 #
@@ -221,3 +219,31 @@ Releases %>%  group_by(Tool) %>%
               geom_label_repel(data = Releases %>% group_by(Tool) %>% filter(rdate == min(rdate)| rdate == max(rdate)), aes(label = tag_name), 
                                 nudge_y = 0.1) +
               labs(x = "Release dates", y = "Tool") 
+
+# Events -----
+
+# Try to determine the level of public activity in a repo
+#
+# https://docs.github.com/en/free-pro-team@latest/rest/activity/events
+#
+# Only events created within the past 90 days will be included in timelines. 
+# Events older than 90 days will not be included (even if the total number of 
+# events in the timeline is less than 300).
+#
+# What is returned:
+#
+# https://docs.github.com/en/webhooks-and-events/events/github-event-types
+#
+
+# FAIR-Checker https://github.com/IFB-ElixirFr/FAIR-checker
+rr <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/events?per_page=100", simplifyDataFrame = TRUE, flatten = TRUE)
+
+# Want activity from project members (contributors), i.e. not from an external
+# submitting an issue or pull request.
+
+# Also check-out https://docs.github.com/en/graphql/overview/explorer which uses GraphQL
+
+rro <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/contributors", simplifyDataFrame = TRUE, flatten = TRUE)
+
+rro %>% filter(login != "dependabot[bot]") %>% 
+        select(login) %>%  pull() -> users

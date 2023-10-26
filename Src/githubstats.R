@@ -132,6 +132,10 @@ ToolCommits %>% mutate(cdate = floor_date(cdate, unit = "week")) %>%
                scale_y_continuous(breaks = breaks_pretty()) +
                labs(x = "Commit date", y = "Commit density  per month")
 
+# Earliest and last commits
+ToolCommits %>% group_by(Tool) %>% 
+                summarise(Start = min(cdate), Last = max(cdate))
+
 # Commits of Tool by date
 ToolCommits %>%  ggplot(aes(x = cdate, y = Tool, colour = Tool)) + 
                  geom_point() + geom_line() +
@@ -220,7 +224,7 @@ Releases %>%  group_by(Tool) %>%
                                 nudge_y = 0.1) +
               labs(x = "Release dates", y = "Tool") 
 
-# Events -----
+# Github events -----
 
 # Try to determine the level of public activity in a repo
 #
@@ -247,3 +251,19 @@ rro <- fromJSON("https://api.github.com/repos/IFB-ElixirFr/FAIR-checker/contribu
 
 rro %>% filter(login != "dependabot[bot]") %>% 
         select(login) %>%  pull() -> users
+
+rr %>% filter(actor.login %in% users)      %>% 
+       mutate(cdate = as.Date(created_at)) %>% 
+       select(cdate, type)                 %>% 
+       ggplot(aes(x = cdate, y = type, colour = type)) +
+       geom_line() +
+       geom_point() +
+       theme_bw()
+
+rr %>% filter(actor.login %in% users)  %>% 
+       select(type)                    %>% 
+       ggplot(aes(x = type)) +
+       geom_bar(fill = "red", colour = "black") +
+       theme_bw() +
+       theme( axis.text.x = element_text(angle = -45, hjust = 0)) +
+       labs(y = "Number of Activities", x = "Type of Activity")

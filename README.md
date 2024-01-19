@@ -39,11 +39,20 @@ and in more detail:
 
 
 
-## Tools used
+## Test Software
+
+The following software are used for testing:
+
+* [RegistryScotland.R](Src/RegistryScotland.R) - R script to look at some of the data published by the [National Records of Scotland](https://www.nrscotland.gov.uk/).
+* [githubstats.R](githubstats.R) - R script to look at the number of commits of particular repositories.
+
+## Tools Tried
 
 Tools used to measure compliance with FAIR:
 
-* [somef](https://github.com/KnowledgeCaptureAndDiscovery/somef)
-* [Howfairis](https://github.com/fair-software/howfairis)
-* [Fair-enough-metrics](https://github.com/vemonet/fair-enough-metrics)
+* [Howfairis](https://github.com/fair-software/howfairis) - does not use FAIR for research software (FAIR4RS) but uses aligned FAIR software [recommendations](https://fair-software.eu/).
+* [Fair-enough-metrics](https://github.com/vemonet/fair-enough-metrics) - really assesses FAIR data.
+* [F-UJI](https://github.com/pangaea-data-publisher/fuji) - really assesses FAIR data.
+* [FAIR-checker](https://github.com/IFB-ElixirFr/FAIR-checker) - really assesses FAIR data.
+* [FAIR checklist](https://github.com/ardc-fair-checklist/ardc-fair-checklist.github.io) - unlike the other tools this is a self assessment checker.
 

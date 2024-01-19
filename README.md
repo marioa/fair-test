@@ -47,28 +47,3 @@ Tools used to measure compliance with FAIR:
 * [Howfairis](https://github.com/fair-software/howfairis)
 * [Fair-enough-metrics](https://github.com/vemonet/fair-enough-metrics)
 
-## Changes
-
-What was required to compy with the metrics.
-
-|       | FAIR  for data | FAIR for software |
-| ----- | -------------- | ----------------- |
-| F1    |                |                   |
-| F1.1  |          -     |                   |
-| F1.2  |          -     |                   |
-| F2    |                |                   |
-| F3    |                |                   |
-| F4    |                |                   |
-| A1    |                |                   |
-| A1.1  |                |                   |
-| A1.2  |                |                   |
-| A2    |                |                   |
-| I1    |                |                   |
-| I2    |                |                   |
-| I3    |                |   -               |
-| R1    |                |                   |
-| R1.1  |                |                   |
-| R1.2  |                |                   |
-| R1.3  |                |                   |
-| R2    |          -     |                   |
-| R3    |          -     |                   |

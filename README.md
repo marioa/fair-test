@@ -2,6 +2,8 @@
 
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%20%20%E2%97%8F%20%20%E2%97%8B%20%20%E2%97%8F%20%20%E2%97%8B-orange)](https://fair-software.eu)
 
+[![FAIR checklist badge](https://fairsoftwarechecklist.net/badge.svg)](https://fairsoftwarechecklist.net/v0.2?f=21&a=20111&i=20000&r=013)
+
 This is a target end point for FAIR and FAIR4RS metric testing software to evaluate how easy/expensive it is to get a fully compliant repository that complies with the FAIR principles. The `codemeta.json` file was generated using the [codemeta-generator](https://codemeta.github.io/codemeta-generator/).
 
 ## FAIR principles for data and research software
@@ -46,7 +48,7 @@ The following software are used for testing:
 * [RegistryScotland.R](Src/RegistryScotland.R) - R script to look at some of the data published by the [National Records of Scotland](https://www.nrscotland.gov.uk/).
 * [githubstats.R](githubstats.R) - R script to look at the number of commits of particular repositories.
 
-## Tools Tried
+## Tools looked at
 
 Tools used to measure compliance with FAIR:
 
@@ -54,5 +56,5 @@ Tools used to measure compliance with FAIR:
 * [Fair-enough-metrics](https://github.com/vemonet/fair-enough-metrics) - really assesses FAIR data.
 * [F-UJI](https://github.com/pangaea-data-publisher/fuji) - really assesses FAIR data.
 * [FAIR-checker](https://github.com/IFB-ElixirFr/FAIR-checker) - really assesses FAIR data.
-* [FAIR checklist](https://github.com/ardc-fair-checklist/ardc-fair-checklist.github.io) - unlike the other tools this is a self assessment checker.
+* [FAIR checklist](https://github.com/ardc-fair-checklist/ardc-fair-checklist.github.io) (repo, [web form](https://fairsoftwarechecklist.net/v0.2/)) - unlike the other tools this is a self assessment checker.
 
